@@ -1,0 +1,47 @@
+import './App.css';
+import Cat from './Cat';
+import Cat2 from './Cat2';
+import React, { useState } from 'react';
+
+function App() {
+
+  const [countInParent, setCountInParent] = useState(0);
+
+  function updateCountInParent(count){
+    setCountInParent(count)
+  }
+
+  return (
+    <div>
+      <p>Inside the Parent: {countInParent}</p>
+      <Cat onCountUpdate={updateCountInParent}/>
+      <Cat2 />
+    </div>
+  );
+}
+
+export default App;
+
+
+
+
+********************************************************************************
+
+import React, { useState } from 'react';
+
+function Cat(props) {
+
+  const [countInChild1, setCountInChild1] = useState(0);
+  function updateCountInChild1(){
+        setCountInChild1(countInChild1+1);
+        props.onCountUpdate(countInChild1+1);
+  }
+  return (
+    <div>
+        <p>child 1: {countInChild1}</p>
+        <button onClick={updateCountInChild1}>but</button>
+    </div>
+  );
+}
+
+export default Cat;
